@@ -1,85 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spotify Mood Playlist Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Montserrat:wght@600;700&family=Nunito:wght@400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Nunito:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-  
-</head>
-<body>
-  <header>
-    <h1>Spotify Mood Playlist Generator</h1>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify Mood Playlist Generator</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Righteous&family=Montserrat:wght@600;700&family=Nunito:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Nunito:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Spotify Mood Playlist Generator</h1>
+    </header>
 
-  <main>
-    
-    <!-- Login Section -->
-    <section id="login-section">
-      <h2>Login with Spotify</h2>
-      <button id="login-btn">Login with Spotify</button>
-    </section>
+    <main>
+      <!-- Login Section -->
+      <!-- <section id="login-section">
+        <h2>Login with Spotify</h2>
+        <button id="login-btn">Login with Spotify</button>
+      </section> -->
 
-    <!-- Mood Selection Section -->
-    <section id="mood-section">
-      <h2>Select Your Mood</h2>
-      <form id="mood-form">
-        <label for="mood">Choose a mood:</label>
-        <select id="mood" name="mood" required>
-          <option value="">-- Select a mood --</option>
-          <option value="happy">Happy</option>
-          <option value="chill">Chill</option>
-          <option value="focused">Focused</option>
-          <option value="romantic">Romantic</option>
-          <option value="sad">Sad</option>
-          <option value="energetic">Energetic</option>
-          <option value="nostalgic">Nostalgic</option>
-          <option value="motivated">Motivated</option>
-          <option value="DR">dembow</option>
+      <!-- Search Type Switcher -->
+      <section id="search-switcher">
+        <h2>Choose Search Mode</h2>
+        <select id="searchType">
+          <option value="mood">Mood Playlist</option>
+          <option value="artist">Artist Search</option>
         </select>
+      </section>
 
-        <fieldset>
-          <legend>Playlist Type</legend>
-          <label><input type="radio" name="playlistType" value="personal" required /> My Music History</label>
-          <label><input type="radio" name="playlistType" value="random" required /> Random Music</label>
-        </fieldset>
+      <!-- Artist Search Section -->
+      <section id="artist-section" style="display: none">
+        <h2>Search Artist</h2>
+        <form id="artist-form">
+          <label for="artist-input">Artist Name:</label>
+          <input
+            type="text"
+            id="artist-input"
+            required
+            placeholder="Type an artist name..."
+          />
+          <button type="submit">Search Artist</button>
+        </form>
 
-        <button type="submit">Generate Playlist</button>
-      </form>
-    </section>
+        <!-- Results area -->
+        <div id="artist-results"></div>
+      </section>
 
-    <!-- Fake Playlist Preview -->
-    <section id="playlist-preview">
-      <h2>Your Playlist</h2>
-      <div class="playlist">
-        <div class="song-card">
-          <img src="https://picsum.photos/100?random=1" alt="Album cover">
-          <p><strong>Dreams</strong><br><span>Fleetwood Mac</span></p>
+      <!-- Mood Selection Section -->
+      <section id="mood-section">
+        <h2>Select Your Mood</h2>
+        <form id="mood-form">
+          <label for="mood">Choose a mood:</label>
+          <select id="mood" name="mood" required>
+            <option value="">-- Select a mood --</option>
+            <option value="happy">Happy</option>
+            <option value="chill">Chill</option>
+            <option value="focused">Focused</option>
+            <option value="romantic">Romantic</option>
+            <option value="sad">Sad</option>
+            <option value="energetic">Energetic</option>
+            <option value="nostalgic">Nostalgic</option>
+            <option value="motivated">Motivated</option>
+            <option value="DR">dembow</option>
+          </select>
+
+          <fieldset>
+            <legend>Playlist Type</legend>
+            <label
+              ><input
+                type="radio"
+                name="playlistType"
+                value="personal"
+                required
+              />
+              My Music History</label
+            >
+            <label
+              ><input
+                type="radio"
+                name="playlistType"
+                value="random"
+                required
+              />
+              Random Music</label
+            >
+          </fieldset>
+
+          <button type="submit">Generate Playlist</button>
+        </form>
+      </section>
+
+      <!-- Fake Playlist Preview -->
+      <section id="playlist-preview" >
+        <h2>Your Playlist</h2>
+        <div class="playlist">
+          <div class="song-card">
+            <img src="https://picsum.photos/100?random=1" alt="Album cover" />
+            <p><strong>Dreams</strong><br /><span>Fleetwood Mac</span></p>
+          </div>
+          <div class="song-card">
+            <img src="https://picsum.photos/100?random=2" alt="Album cover" />
+            <p><strong>Blinding Lights</strong><br /><span>The Weeknd</span></p>
+          </div>
+          <div class="song-card">
+            <img src="https://picsum.photos/100?random=3" alt="Album cover" />
+            <p><strong>Levitating</strong><br /><span>Dua Lipa</span></p>
+          </div>
+          <div class="song-card">
+            <img src="https://picsum.photos/100?random=4" alt="Album cover" />
+            <p>
+              <strong>Stay</strong><br /><span>Kid LAROI & Justin Bieber</span>
+            </p>
+          </div>
         </div>
-        <div class="song-card">
-          <img src="https://picsum.photos/100?random=2" alt="Album cover">
-          <p><strong>Blinding Lights</strong><br><span>The Weeknd</span></p>
-        </div>
-        <div class="song-card">
-          <img src="https://picsum.photos/100?random=3" alt="Album cover">
-          <p><strong>Levitating</strong><br><span>Dua Lipa</span></p>
-        </div>
-        <div class="song-card">
-          <img src="https://picsum.photos/100?random=4" alt="Album cover">
-          <p><strong>Stay</strong><br><span>Kid LAROI & Justin Bieber</span></p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Placeholder for API Data -->
-    <!-- This section will later load playlists dynamically from the Spotify API -->
-  </main>
+      <!-- Placeholder for API Data -->
+      <!-- This section will later load playlists dynamically from the Spotify API -->
+       
+    </main>
 
-  <footer>
-    <p>&copy; 2025 Spotify Mood Playlist Generator | Built with ❤️</p>
-  </footer>
-  <script type="module" src="main.js" ></script>
-</body>
+    <footer>
+      <p>&copy; 2025 Spotify Mood Playlist Generator | Built with ❤️</p>
+    </footer>
+    <script type="module" src="main.js"></script>
+  </body>
 </html>

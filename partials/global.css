@@ -1,0 +1,32 @@
+/* Base Theme Colors */
+:root {
+    --bg-color: #f7f7f7;
+    --text-color: #222;
+    --card-bg: rgba(255, 255, 255, 0.25);
+    --border-glass: rgba(255, 255, 255, 0.3);
+    --accent: #2b6cb0;
+  }
+  
+  /* Full-Screen Repeating Music Notes + Animated Rainbow Background */
+  body {
+    font-family: "Nunito", sans-serif;
+    margin: 0;
+    color: var(--text-color);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23000' fill-opacity='0.05'%3E%3Ctext x='10' y='30' font-size='28'%3E%26%239837%3B%3C/text%3E%3Ctext x='70' y='90' font-size='32'%3E%26%239839%3B%3C/text%3E%3Ctext x='40' y='60' font-size='24'%3E%26%239838%3B%3C/text%3E%3Ctext x='90' y='20' font-size='28'%3E%26%239836%3B%3C/text%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(#ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #b2fefa);
+    background-repeat: repeat, no-repeat;
+    background-size: 200px 200px, 1200% 1200%;
+    animation: rainbow 150s linear infinite;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  @keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
