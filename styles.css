@@ -6,11 +6,63 @@
 @import 'partials/global.css';
 @import 'partials/form.css';
 
+/* Base Theme Colors */
+:root {
+  --bg-color: #f7f7f7;
+  --text-color: #222;
+  --card-bg: rgba(255, 255, 255, 0.25);
+  --border-glass: rgba(255, 255, 255, 0.3);
+  --accent: #2b6cb0;
+}
 
+/* Full-Screen Repeating Music Notes + Animated Rainbow Background */
+body {
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+  color: var(--text-color);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23000' fill-opacity='0.05'%3E%3Ctext x='10' y='30' font-size='28'%3E%26%239837%3B%3C/text%3E%3Ctext x='70' y='90' font-size='32'%3E%26%239839%3B%3C/text%3E%3Ctext x='40' y='60' font-size='24'%3E%26%239838%3B%3C/text%3E%3Ctext x='90' y='20' font-size='28'%3E%26%239836%3B%3C/text%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(#ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #b2fefa);
+  background-repeat: repeat, no-repeat;
+  background-size: 200px 200px, 1200% 1200%;
+  animation: rainbow 150s linear infinite;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
 
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
+/* Layout */
+header, footer {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
 
+h1, h2, h3, legend {
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+}
 
+h1 {
+  margin: 0.5rem 0;
+  font-family: "Righteous", cursive;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  color: var(--accent);
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
 
 main {
   flex: 1;
@@ -130,53 +182,40 @@ html, body {
   overflow-x: hidden;
 }
 
-/* ===========================
-   MOBILE LAYOUT (≤ 600px)
-   =========================== */
-@media (max-width: 600px) {
-
-  /* Layout adjusts to a single stacked column */
-  main {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-    gap: 1.5rem;
-  }
-
-  header h1 {
-    font-size: 1.8rem;
-  }
-
-  /* Form and sections shrink spacing */
-  form {
-    padding: 1.25rem;
-    gap: 0.75rem;
-  }
-
-  #mood-section h2,
-  #login-section h2,
-  #playlist-preview h2 {
-    font-size: 1.4rem;
-  }
-
-  /* Prevent any side scroll */
-  html, body {
-    overflow-x: hidden;
-  }
-
-/* -----------------------------
-   Mobile fixes (replace earlier)
-   Targets screens ≤ 600px only
-   ----------------------------- */
 @media (max-width: 600px) {
   html, body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden !important;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
 
-  /* main column + spacing */
+  /* Keep music notes, just stationary; slow gradient */
+  body {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23000' fill-opacity='0.05'%3E%3Ctext x='10' y='30' font-size='28'%3E%26%239837%3B%3C/text%3E%3Ctext x='70' y='90' font-size='32'%3E%26%239839%3B%3C/text%3E%3Ctext x='40' y='60' font-size='24'%3E%26%239838%3B%3C/text%3E%3Ctext x='90' y='20' font-size='28'%3E%26%239836%3B%3C/text%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(270deg, #ff7a7a, #ffca7a, #7aff9d, #7aceff, #c67aff);
+    background-repeat: repeat, no-repeat;
+    background-size: 200px 200px, 1200% 1200%;
+    animation: mobileBg 30s ease infinite; /* slower than before */
+  }
+
+  @keyframes mobileBg {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Header adjustments */
+  header h1 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0 8px;
+  }
+
   main {
+    display: grid;
     grid-template-columns: 1fr;
     padding: 12px;
     gap: 14px;
@@ -184,58 +223,43 @@ html, body {
     box-sizing: border-box;
   }
 
-  header h1 {
-    font-size: 1.6rem;
-    line-height: 1.15;
-    margin: 0;
-    padding: 0 4px;
-  }
-
-  /* tighten form spacing */
   form {
     padding: 12px;
     gap: 0.6rem;
   }
   fieldset { gap: 0.35rem; }
-  button { padding: 10px 12px; }
+  button { padding: 10px 12px; font-size: 0.9rem; }
 
-  /* Playlist: responsive grid that never overflows */
   .playlist {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 10px;
-    padding: 0;
-    margin-top: 10px;
     width: 100%;
+    margin-top: 10px;
     box-sizing: border-box;
   }
 
-  /* Compact song card layout */
   .song-card {
     display: flex;
-    gap: 10px;
     align-items: center;
-    background: rgba(255,255,255,0.28);
+    gap: 10px;
     padding: 8px;
     border-radius: 8px;
+    background: rgba(255,255,255,0.28);
     width: 100%;
     min-height: 56px;
-    box-sizing: border-box;
     overflow: hidden;
   }
 
-  /* Force square album art, keep cover centered and not stretched */
   .song-card img {
     width: 52px;
     height: 52px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    flex: 0 0 52px;
     border-radius: 6px;
-    display: block;
+    flex: 0 0 52px;
   }
 
-  /* Title + artist stacked but compact; prevent wrapping from creating overflow */
   .song-card p {
     margin: 0;
     font-size: 0.86rem;
@@ -247,13 +271,11 @@ html, body {
   }
 
   .song-card p span {
-    display: inline-block;
-    color: rgba(0,0,0,0.6);
     font-size: 0.78rem;
+    color: rgba(0,0,0,0.6);
     margin-left: 6px;
   }
 
-  /* small link style, won't force new width */
   .song-card a {
     font-size: 0.72rem;
     color: var(--accent);
@@ -262,12 +284,14 @@ html, body {
     white-space: nowrap;
   }
 
-  /* fallback: single column on very narrow screens */
   @media (max-width: 360px) {
     .playlist {
       grid-template-columns: 1fr;
     }
-    .song-card img { width: 48px; height: 48px; flex: 0 0 48px; }
+    .song-card img {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+    }
   }
-}
 }
