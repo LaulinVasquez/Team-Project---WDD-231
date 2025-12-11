@@ -19,13 +19,7 @@
       <h1>Spotify Mood Playlist Generator</h1>
     </header>
 
-    <main>
-      <!-- Login Section -->
-      <!-- <section id="login-section">
-        <h2>Login with Spotify</h2>
-        <button id="login-btn">Login with Spotify</button>
-      </section> -->
-
+    <main class="main-container">
       <!-- Search Type Switcher -->
       <section id="search-switcher">
         <h2>Choose Search Mode</h2>
@@ -98,7 +92,7 @@
       </section>
 
       <!-- Fake Playlist Preview -->
-      <section id="playlist-preview" >
+      <section id="playlist-preview">
         <h2>Your Playlist</h2>
         <div class="playlist">
           <div class="song-card">
@@ -121,10 +115,18 @@
           </div>
         </div>
       </section>
+      <section id="artist-albums" style="display: none">
+        <h3>Albums</h3>
+        <div id="albums-container" class="album-grid"></div>
+      </section>
 
-      <!-- Placeholder for API Data -->
-      <!-- This section will later load playlists dynamically from the Spotify API -->
-       
+      <div id="album-modal" class="modal" style="display: none">
+        <div id="modal-content">
+          <span id="close-album-modal" class="close">&times;</span>
+          <h3 id="album-title"></h3>
+          <ul id="album-tracks"></ul>
+        </div>
+      </div>
     </main>
 
     <footer>

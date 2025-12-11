@@ -1,0 +1,53 @@
+/* ====== ALBUM GRID ====== */
+
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+  }
+  
+  /* Album Card */
+  .album-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  /* Hover effect */
+  .album-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Album Cover */
+  .album-card img {
+    width: 100%;
+    border-radius: 10px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  /* Album Title */
+  .album-card h4 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.95rem;
+    margin: 6px 0;
+    font-weight: 700;
+    color: #222;
+  }
+  
+  /* Release Year */
+  .album-card p {
+    font-family: "Nunito", sans-serif;
+    margin: 0;
+    font-size: 0.85rem;
+    color: #555;
+  }
+  
