@@ -5,6 +5,7 @@ form {
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -24,20 +25,37 @@ form {
   }
   
   button {
-    background-color: var(--accent);
+    background-color: linear-gradient(#03001e, #7303c0, #ec38bc, #fdeff9);
     color: white;
     cursor: pointer;
     border: none;
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
     transition: transform 0.2s ease, background-color 0.3s;
+    
   }
   
   button:hover {
     transform: scale(1.03);
     background-color: #1a4e89;
   }
+
+  button {
+    border-radius: 5px;
+    color: #040404;
+    overflow: hidden;
+  }
   
+  button:active {
+    border-color: #17954c;
+    color: #17954c;
+  }
+  
+  button:hover {
+    background: #24b662;
+  }
+  
+
   fieldset {
     border: none;
     display: flex;

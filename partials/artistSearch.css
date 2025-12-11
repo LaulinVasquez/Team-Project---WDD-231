@@ -1,4 +1,4 @@
-/* Artist Search Section */
+
 #artist-section {
     margin-top: 40px;
   }
@@ -10,7 +10,7 @@
     gap: 15px;
   }
   
-  /* Each artist result row */
+
   .artist-card {
     display: flex;
     align-items: center;
@@ -52,3 +52,6 @@
     opacity: 0.7;
   }
   
+  .artist-card a:hover{
+    color: #1db954;
+  }

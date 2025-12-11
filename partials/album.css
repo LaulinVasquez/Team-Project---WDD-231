@@ -1,53 +1,56 @@
-/* ====== ALBUM GRID ====== */
 
 .album-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+    grid-template-columns: repeat(2, 1fr);   
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 600px;   
+    margin: 0 auto;
   }
   
-  /* Album Card */
+
   .album-card {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    padding: 0.8rem;
     text-align: center;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-    overflow: hidden;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 2rem;
   }
   
-  /* Hover effect */
   .album-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transform: scale(1.05);
   }
   
-  /* Album Cover */
+
   .album-card img {
     width: 100%;
     border-radius: 10px;
-    aspect-ratio: 1;
     object-fit: cover;
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
   }
   
-  /* Album Title */
+
   .album-card h4 {
-    font-family: "Montserrat", sans-serif;
-    font-size: 0.95rem;
-    margin: 6px 0;
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
     font-weight: 700;
-    color: #222;
+    color: #1db954;
+    font-family: "Montserrat", sans-serif;
   }
   
-  /* Release Year */
+
   .album-card p {
-    font-family: "Nunito", sans-serif;
     margin: 0;
-    font-size: 0.85rem;
-    color: #555;
+    font-size: 0.8rem;
+    color: #fff;
+    font-family: "Nunito", sans-serif;
+    
   }
   
+  .album-card a:hover{
+    color: #1db954;
+  }

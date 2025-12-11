@@ -1,25 +1,23 @@
-// ===============================
 // MOOD PLAYLIST HANDLER
-// ===============================
-document.getElementById('mood-form').addEventListener('submit', async (e) => {
+document.getElementById("mood-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const mood = document.getElementById('mood').value;
-  if (!mood) return alert('Please select a mood!');
+  const mood = document.getElementById("mood").value;
+  if (!mood) return alert("Please select a mood!");
 
-  const playlistContainer = document.querySelector('.playlist');
-  playlistContainer.innerHTML = '<p>Loading songs...</p>';
+  const playlistContainer = document.querySelector(".playlist");
+  playlistContainer.innerHTML = "<p>Loading songs...</p>";
 
   try {
-    const res = await fetch('/.netlify/functions/getTrack', {
-      method: 'POST',
+    const res = await fetch("/.netlify/functions/getTrack", {
+      method: "POST",
       body: JSON.stringify({ mood }),
     });
 
     if (!res.ok) {
       const text = await res.text();
-      console.error('Error response:', text);
-      throw new Error('Network response was not ok');
+      console.error("Error response:", text);
+      throw new Error("Network response was not ok");
     }
 
     const data = await res.json();
@@ -29,27 +27,26 @@ document.getElementById('mood-form').addEventListener('submit', async (e) => {
       .map(
         (t) => `
         <div class="song-card">
-          <img src="${t.albumCover || 'https://via.placeholder.com/100'}" alt="Album cover">
+          <img src="${t.albumCover || "https://via.placeholder.com/100"}" alt="Album cover">
           <p><strong>${t.name}</strong><br><span>${t.artist}</span></p>
           <a href="${t.url}" target="_blank">Open in Spotify</a>
         </div>`
       )
       .join("");
-
   } catch (err) {
     console.error(err);
-    playlistContainer.innerHTML = '<p>Failed to load playlist 🙃</p>';
+    playlistContainer.innerHTML = "<p>Failed to load playlist 🙃</p>";
   }
 });
 
-
-// ===============================
 // SWITCH BETWEEN MODES (Artist / Mood)
-// ===============================
+
 const searchTypeSelect = document.getElementById("searchType");
 const artistSection = document.getElementById("artist-section");
 const moodSection = document.getElementById("mood-section");
 const playlistSection = document.getElementById("playlist-preview");
+const albumContainer = document.getElementById("albums-container");
+const albumSubtitle = document.getElementById("album-subtitle");
 
 searchTypeSelect.addEventListener("change", () => {
   const mode = searchTypeSelect.value;
@@ -58,17 +55,18 @@ searchTypeSelect.addEventListener("change", () => {
     artistSection.style.display = "block";
     moodSection.style.display = "none";
     playlistSection.style.display = "none";
+    albumContainer.style.display = "block";
   } else {
     artistSection.style.display = "none";
     moodSection.style.display = "block";
     playlistSection.style.display = "block";
+    albumContainer.style.display = "none";
+    albumSubtitle.style.display = "none";
   }
 });
 
-
-// ===============================
 // ARTIST SEARCH HANDLER
-// ===============================
+
 const artistForm = document.getElementById("artist-form");
 const artistInput = document.getElementById("artist-input");
 const artistResults = document.getElementById("artist-results");
@@ -83,7 +81,9 @@ if (artistForm) {
     artistResults.innerHTML = "<p>Searching...</p>";
 
     try {
-      const res = await fetch(`/.netlify/functions/searchArtist?name=${encodeURIComponent(query)}`);
+      const res = await fetch(
+        `/.netlify/functions/searchArtist?name=${encodeURIComponent(query)}`
+      );
       const data = await res.json();
 
       const artists = data?.artists || [];
@@ -92,7 +92,7 @@ if (artistForm) {
         artistResults.innerHTML = `<p>No artist found.</p>`;
         return;
       }
-
+      albumSubtitle.style.display = "block";
       artistResults.innerHTML = artists
         .map((a) => {
           const img = a.image || "https://via.placeholder.com/100";
@@ -112,15 +112,12 @@ if (artistForm) {
           `;
         })
         .join("");
-
     } catch (err) {
       console.error("Artist search error:", err);
       artistResults.innerHTML = "<p>Error searching artist.</p>";
     }
   });
 }
-
-
 
 const albumsContainer = document.getElementById("albums-container");
 
@@ -131,7 +128,7 @@ artistResults.addEventListener("click", async (e) => {
 
   albumsContainer.innerHTML = "<p>Loading albums...</p>";
   document.getElementById("artist-albums").style.display = "block";
-
+  albumContainer.style.display = "grid";
 
   try {
     const res = await fetch("/.netlify/functions/getArtistAlbums", {
@@ -140,7 +137,9 @@ artistResults.addEventListener("click", async (e) => {
     });
 
     const data = await res.json();
+
     const albums = data?.items || [];
+    console.log(albums)
 
     if (albums.length === 0) {
       albumsContainer.innerHTML = "<p>No albums found.</p>";
@@ -148,15 +147,18 @@ artistResults.addEventListener("click", async (e) => {
     }
 
     albumsContainer.innerHTML = albums
-      .map((album) => `
+      .map(
+        (album) => `
         <div class="album-card">
           <img src="${album.images[0]?.url || "https://via.placeholder.com/150"}">
           <p><strong>${album.name}</strong></p>
+          <p>Total Tracks: ${album.total_tracks}</p>
           <p>${album.release_date.slice(0, 4)}</p>
+          <a href="${album.external_urls.spotify}" target="_blank">Check the album on Spotify</a>
         </div>
-      `)
+      `
+      )
       .join("");
-
   } catch (err) {
     console.error("Album fetch error:", err);
     albumsContainer.innerHTML = "<p>Error loading albums.</p>";
