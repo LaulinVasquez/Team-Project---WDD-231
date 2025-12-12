@@ -14,7 +14,6 @@ export async function handler(event) {
     await authorizeSpotify();
 
     const result = await spotifyApi.searchArtists(name, { limit: 5 });
-
     const artists = result.body.artists.items.map((artist) => ({
       id: artist.id,
       name: artist.name,
